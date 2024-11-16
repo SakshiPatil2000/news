@@ -215,9 +215,7 @@ class _HomepageState extends State<Homepage> {
             currentIndex = index;
           });
 
-
           if (index == 0) {
-
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -225,7 +223,6 @@ class _HomepageState extends State<Homepage> {
               ),
             );
           } else if (index == 1) {
-
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -236,12 +233,36 @@ class _HomepageState extends State<Homepage> {
               ),
             );
           } else if (index == 2) {
-
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Login(),
-              ),
+            // Show confirmation dialog for logout
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Are you sure?'),
+                  content: Text('Do you really want to log out?'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Cancel'),
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                      },
+                    ),
+                    TextButton(
+                      child: Text('Yes'),
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                        // Perform the logout logic here
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Login(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
             );
           }
         },
@@ -507,11 +528,36 @@ class _BookmarkedArticlesScreenState extends State<BookmarkedArticlesScreen> {
               ),
             );
           } else if (index == 2) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Login(),
-              ),
+            // Show confirmation dialog for logout
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Are you sure?'),
+                  content: Text('Do you really want to log out?'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('Cancel'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: Text('Yes'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Login(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
             );
           }
         },
